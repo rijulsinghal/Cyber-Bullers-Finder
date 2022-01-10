@@ -244,7 +244,7 @@ def find_suspected_user(Query):
     api = TwitterAuth(consumer_key,consumer_secret_key,access_token,access_secret_token)
 
     #No. of tweets required
-    Limit = 10
+    Limit = 1000
 
     random_tweets = fetchtweets(api,Query,Limit)
     cleaned_tweets = cleantweets(random_tweets)
