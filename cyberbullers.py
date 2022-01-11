@@ -1,6 +1,7 @@
 #Import Commands
 import pandas as pd
 import re
+import json
 from sklearn.model_selection import train_test_split
 from sklearn import svm
 import nltk
@@ -24,6 +25,13 @@ nest_asyncio.apply()
 #Final Result found is stored in this dict
 user_details_twitter = {}
 user_details_instagram = {}
+
+class SetEncoder(json.JSONEncoder):
+    def default(self, obj):
+       if isinstance(obj, set):
+          return list(obj)
+
+       return json.JSONEncoder.default(self, obj)
 
 def fitvectorizer(filename,vectorizer):
     df = pd.read_csv(filename)
@@ -241,7 +249,7 @@ def find_suspected_user(Query):
     clf2 = model_list[1]
 
     #Twitter Authentication
-    api = TwitterAuth(consumer_key,consumer_secret_key,access_token,access_secret_token)
+    api = TwitterAuth("b8KRnyjlhemPxKq12vyZOWAaq","P5GZSBhLiOt9VXHZ9exo2uCtKj1WRp6AvYIT92IGHB8Hh5LK76","1448508667154731009-mqimm7eRTWKaDBxUvRgru67fxouWKk","GpmK3K8onr0B8aigDMWzHq8m68jf1kc68RasqeTGnfqn5")
 
     #No. of tweets required
     Limit = 1000
@@ -259,7 +267,7 @@ def find_suspected_user(Query):
 
     save_suspected_name(suspected_user_name)  # Save Twitter Data
 
-    instagram('userid','pwd',suspected_user_name)  # Save Instagram Data
+    instagram("hackingchunk","bullers@1234",suspected_user_name)  # Save Instagram Data
 
     user_details['suspected_user_id'] = suspected_user_name
     user_details['twitter'] = user_details_twitter
@@ -267,14 +275,15 @@ def find_suspected_user(Query):
 
     deletefiles() # Delete Temporary Files
 
+    user_details = json.dumps(user_details,cls = SetEncoder)
     return user_details
-
+    
 # Taking Input from User
 Query = input("Enter User-ID: ")
 try:
     user_details = find_suspected_user(Query)
     print(user_details)
-except:
+except :
     deletefiles()
     print("Something went wrong")
 
