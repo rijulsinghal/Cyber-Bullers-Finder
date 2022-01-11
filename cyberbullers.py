@@ -249,7 +249,7 @@ def find_suspected_user(Query):
     clf2 = model_list[1]
 
     #Twitter Authentication
-    api = TwitterAuth("b8KRnyjlhemPxKq12vyZOWAaq","P5GZSBhLiOt9VXHZ9exo2uCtKj1WRp6AvYIT92IGHB8Hh5LK76","1448508667154731009-mqimm7eRTWKaDBxUvRgru67fxouWKk","GpmK3K8onr0B8aigDMWzHq8m68jf1kc68RasqeTGnfqn5")
+    api = TwitterAuth(consumer_key,consumer_secret_key,access_token,access_secret_token)
 
     #No. of tweets required
     Limit = 1000
@@ -267,7 +267,7 @@ def find_suspected_user(Query):
 
     save_suspected_name(suspected_user_name)  # Save Twitter Data
 
-    instagram("hackingchunk","bullers@1234",suspected_user_name)  # Save Instagram Data
+    instagram(userid,pwd,suspected_user_name)  # Save Instagram Data
 
     user_details['suspected_user_id'] = suspected_user_name
     user_details['twitter'] = user_details_twitter
