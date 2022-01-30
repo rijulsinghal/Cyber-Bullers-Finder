@@ -217,7 +217,7 @@ def instagram(user_name , password , suspected_user_name):
                 user_details[i] = [user_info,followers_result,following_result]
 
         except Exception as e:
-                print(e)
+#                 print(e)
                 pass
 
 
@@ -282,7 +282,7 @@ def find_suspected_user(Query):
 Query = input("Enter User-ID: ")
 try:
     user_details = find_suspected_user(Query)
-    print(user_details)
+#     print(user_details)
 except :
     deletefiles()
     print("Something went wrong")
